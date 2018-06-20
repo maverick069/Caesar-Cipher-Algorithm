@@ -11,19 +11,13 @@ public class CaesarCipher {
     public String encrypt(String text, int code){
         int offset=26-code;
         StringBuilder encrp = new StringBuilder();
-        int len = text.length(),index, encIndex;
+        int len = text.length(),index;
         char encCh,ch;
         for(int i=0;i<len;i++){
             ch = text.charAt(i);
             if(ALPHABETS.indexOf(Character.toUpperCase(ch))>-1){
                 index=ALPHABETS.indexOf(Character.toUpperCase(ch));
-                if(index<offset){
-                    encIndex=26-offset+index;
-                }else{
-                    encIndex=index-offset;
-                }
-                encrp.append(chkAndConvToLower(ch, ALPHABETS.charAt(encIndex)));
-                
+                encrp.append(chkAndConvToLower(ch, ALPHABETS.charAt(getOffsetIndex(offset, index))));
             }else{
                 encrp.append(ch);
             }
@@ -39,7 +33,7 @@ public class CaesarCipher {
         int oddOffset=26-odd;
         int evenOffset=26-even;
         StringBuilder encrp = new StringBuilder();
-        int len = text.length(),index, encIndex, encOffset;
+        int len = text.length(),index, encOffset;
         char encCh,ch;
         for(int i=0;i<len;i++){
             ch = text.charAt(i);
